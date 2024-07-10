@@ -1,31 +1,36 @@
-// src/pages/index.tsx
-import Layout from '@/components/Layout';
+import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import Layout from '@/layouts/layout';  import { db } from '@/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '@/firebaseConfig';
-import { Post } from '@/types/post';
 
-const Home = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+const Home: NextPage = () => {
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const querySnapshot = await getDocs(collection(db, 'posts'));
-      const postsData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Post[];
-      setPosts(postsData);
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'users'));
+        const docs = querySnapshot.docs.map(doc => doc.data());
+        setData(docs);
+      } catch (error) {
+        console.error("Error fetching Firestore data: ", error);
+      }
     };
-    fetchPosts();
+    
+    fetchData();
   }, []);
 
   return (
     <Layout>
-      <h1>Blog Posts</h1>
+      <Head>
+        <title>Home Page</title>
+      </Head>
+      <h1>Welcome to the Home Page</h1>
+      <p>This is the main content of the home page.</p>
       <ul>
-        {posts.map(post => (
-          <li key={post.id}>{post.title}</li>
+        {data.map((item, index) => (
+          <li key={index}>{JSON.stringify(item)}</li>
         ))}
       </ul>
     </Layout>
