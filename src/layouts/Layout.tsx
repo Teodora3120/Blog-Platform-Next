@@ -1,26 +1,20 @@
-// src/layouts/layout.tsx
 import { ReactNode } from 'react';
-
+import Navbar from '@/components/navs/Navbar';
+import Footer from '@/components/footers/Footer';
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen bg-gray-200">
       <header>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
+        <Navbar/>
       </header>
-      <main>{children}</main>
-      <footer>
-        <p>© 2024 Your Company</p>
-      </footer>
+      <main className="flex-grow container mx-auto p-4">
+        {children}
+      </main>
+      <Footer/>
     </div>
   );
 };
