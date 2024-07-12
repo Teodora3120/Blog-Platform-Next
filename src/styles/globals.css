@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
+
+/* styles/globals.css */
+html, body, #__next, .flex-col {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -31,4 +41,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.c-pointer{
+  cursor: pointer;
 }
