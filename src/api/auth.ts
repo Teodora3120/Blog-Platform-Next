@@ -1,9 +1,9 @@
 // src/api/auth.ts
 import { auth } from '@/db/firebaseConfig';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import  {createUserWithEmailAndPassword} from '@/db/firebaseConfig'
+import { createUserWithEmailAndPassword } from '@/db/firebaseConfig'
 
-export const login = async (email: string, password: string) => {
+export const LoginUser = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
@@ -12,7 +12,7 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-export const logout = async () => {
+export const LogoutUser = async () => {
   try {
     await signOut(auth);
   } catch (error: any) {
@@ -21,7 +21,7 @@ export const logout = async () => {
 };
 
 
-export const register = async (email: string, password: string, name: string) => {
+export const RegisterUser = async (email: string, password: string, name: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     // Additional user data can be stored in Firestore or Realtime Database

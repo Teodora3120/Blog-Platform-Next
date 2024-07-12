@@ -9,7 +9,7 @@ const AuthNavbar = () => {
     setCurrentLocation(window.location.pathname)
    }, [])
   return (
-    <nav className="bg-gray-500 text-white p-4 sticky top-0 z-10">
+    <nav className="bg-blue-900 text-white p-4 sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold">Blog Post</div>
         <ul className="flex space-x-4">
