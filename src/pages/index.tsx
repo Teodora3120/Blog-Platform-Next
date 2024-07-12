@@ -1,20 +1,12 @@
-// src/pages/index.tsx
-import type { NextPage } from 'next';
-import Head from 'next/head';
+import React, { useEffect } from "react";
+import Router from "next/router";
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Home Page</title>
-      </Head>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to the Home Page</h1>
-        <p className="mb-8">This is the main content of the home page.</p>
-      </div>
-    </>
+const Index: React.FC = () => {
+  useEffect(() => {
+    Router.push("/admin/dashboard");
+  }, []);
 
-  );
+  return <div />;
 };
 
-export default Home;
+export default Index;

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Footer from '@/components/footers/Footer';
+import Footer from '@/components/footers/AuthFooter';
 import AuthNavbar from '@/components/navs/AuthNavbar';
 
 interface LayoutProps {
@@ -12,7 +12,7 @@ const AuthLayout = ({ children }: LayoutProps) => {
             <header>
                 <AuthNavbar />
             </header>
-            <main className="flex-grow w-full p-4">
+            <main className="flex-grow w-full p-4 bg-indigo-100">
                 {children}
             </main>
             <footer className="mt-auto w-full">

@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { RegisterUser } from '@/api/auth';
-import AuthNavbar from '@/components/navs/AuthNavbar';
-import Footer from '@/components/footers/Footer';
 import IconInput from '@/components/IconInput';
+import AuthLayout from '@/layouts/AuthLayout';
 
-const Register: React.FC = () => {
+interface RegisterProps {
+  layout: React.ComponentType<{ children: React.ReactNode }>;
+}
+
+const Register: React.FC<RegisterProps> & { layout: React.ComponentType<{ children: React.ReactNode }> } = ({ layout }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -17,7 +20,7 @@ const Register: React.FC = () => {
     event.preventDefault();
     try {
       await RegisterUser(email, password, name);
-      router.push('/login');
+      router.push('/auth/login');
     } catch (error: any) {
       setError(error.message);
     }
@@ -31,8 +34,8 @@ const Register: React.FC = () => {
     <>
       <div className="flex flex-col items-center justify-center bg-indigo-100">
         <h2 className="text-blue-900 mb-6 text-2xl font-bold">Welcome to Blog Post 📘</h2>
-        <div className="bg-white p-9 rounded-lg shadow-lg">
-          <form onSubmit={handleRegister} className="space-y-4">
+        <div className="bg-white p-12 w-full max-w-md rounded-lg shadow-lg">
+          <form onSubmit={handleRegister}>
             <IconInput
               iconClass="fa-solid fa-signature"
               placeholder="Your fullname..."
@@ -61,7 +64,7 @@ const Register: React.FC = () => {
               <div className="flex items-center justify-center">
                 <button
                   type="submit"
-                  className="px-5 py-1  mt-4 text-white bg-blue-950 rounded-lg hover:bg-blue-900"
+                  className="px-20 py-2 mt-4 text-white bg-blue-950 rounded-lg hover:bg-blue-900"
                 >
                   Sign up
                 </button>
@@ -73,5 +76,7 @@ const Register: React.FC = () => {
     </>
   );
 };
+
+Register.layout = AuthLayout;
 
 export default Register;

@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 import Navbar from '@/components/navs/Navbar';
-import Footer from '@/components/footers/Footer';
+import Footer from '@/components/footers/AdminFooter';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const AdminLayout = ({ children }: LayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-200">
       <header>
@@ -22,4 +22,4 @@ const Layout = ({ children }: LayoutProps) => {
   )
 }
 
-export default Layout;
+export default AdminLayout;
