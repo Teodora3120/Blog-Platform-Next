@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { RegisterUser } from '@/api/auth';
-import IconInput from '@/components/IconInput';
+import { IconInput } from '@/components/IconInput';
 import AuthLayout from '@/layouts/AuthLayout';
 
 interface RegisterProps {

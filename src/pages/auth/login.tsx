@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { LoginUser } from '@/api/auth';
-import IconInput from '@/components/IconInput';
+import { IconInput, IconInputPassword } from '@/components/IconInput';
 import { useUser } from '@/context/UserContext';
 import AuthLayout from '@/layouts/AuthLayout';
 
@@ -13,8 +13,13 @@ const Login: React.FC<LoginProps> & { layout: React.ComponentType<{ children: Re
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { login } = useUser();
+
+  const toggleShowPassword = (showPassword: boolean) => {
+    setShowPassword(!showPassword)
+  }
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -52,12 +57,13 @@ const Login: React.FC<LoginProps> & { layout: React.ComponentType<{ children: Re
               type="email"
               onChange={setEmail}
             />
-            <IconInput
-              iconClass="fa-solid fa-lock"
+            <IconInputPassword
               placeholder="Write your password..."
               value={password}
               type="password"
+              showPassword={showPassword}
               onChange={setPassword}
+              onClick={toggleShowPassword}
             />
             {error && <p className="text-red-500 mb-4">{error}</p>}
             <div className="flex items-center justify-center">

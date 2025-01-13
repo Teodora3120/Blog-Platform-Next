@@ -4,6 +4,7 @@ import Footer from '@/components/footers/AdminFooter';
 import { useUser } from '@/context/UserContext';
 import { useRouter } from 'next/router';
 
+
 interface LayoutProps {
   children: ReactNode;
 }
@@ -13,24 +14,9 @@ const AdminLayout = ({ children }: LayoutProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleRouteStart = () => NProgress.start();
-    const handleRouteDone = () => NProgress.done();
-    const handleRouteError = () => NProgress.done();
-
-    router.events.on('routeChangeStart', handleRouteStart);
-    router.events.on('routeChangeComplete', handleRouteDone);
-    router.events.on('routeChangeError', handleRouteError);
-
     if (!user || !user.uid) {
-      NProgress.start();
-      router.push("/auth/logout").finally(() => NProgress.done());
+      router.push("/auth/logout")
     }
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteStart);
-      router.events.off('routeChangeComplete', handleRouteDone);
-      router.events.off('routeChangeError', handleRouteError);
-    };
   }, [user, router]);
 
   return (
